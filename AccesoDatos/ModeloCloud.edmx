@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SuspiciusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLEVENTO">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_evento" Type="varchar" MaxLength="30" />
+          <Property Name="lugar" Type="varchar" MaxLength="50" />
+          <Property Name="Hora" Type="datetime" />
+          <Property Name="descripcion" Type="varchar" MaxLength="400" />
+          <Property Name="foto_evento" Type="varchar" MaxLength="400" />
+          <Property Name="ID_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUSER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="n_user" Type="varchar" MaxLength="50" />
+          <Property Name="contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="correo" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="int" />
+        </EntityType>
+        <Association Name="FK__TBLEVENTO__ID_us__4E88ABD4">
+          <End Role="TBLUSER" Type="Self.TBLUSER" Multiplicity="1" />
+          <End Role="TBLEVENTO" Type="Self.TBLEVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUSER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLEVENTO">
+              <PropertyRef Name="ID_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SuspiciusDBModelStoreContainer">
+          <EntitySet Name="TBLEVENTO" EntityType="Self.TBLEVENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLUSER" EntityType="Self.TBLUSER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TBLEVENTO__ID_us__4E88ABD4" Association="Self.FK__TBLEVENTO__ID_us__4E88ABD4">
+            <End Role="TBLUSER" EntitySet="TBLUSER" />
+            <End Role="TBLEVENTO" EntitySet="TBLEVENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SuspiciusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLEVENTO">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_evento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hora" Type="DateTime" Precision="3" />
+          <Property Name="descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="foto_evento" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="ID_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBLUSER" Relationship="Self.FK__TBLEVENTO__ID_us__4E88ABD4" FromRole="TBLEVENTO" ToRole="TBLUSER" />
+        </EntityType>
+        <EntityType Name="TBLUSER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <NavigationProperty Name="TBLEVENTO" Relationship="Self.FK__TBLEVENTO__ID_us__4E88ABD4" FromRole="TBLUSER" ToRole="TBLEVENTO" />
+        </EntityType>
+        <Association Name="FK__TBLEVENTO__ID_us__4E88ABD4">
+          <End Role="TBLUSER" Type="Self.TBLUSER" Multiplicity="1" />
+          <End Role="TBLEVENTO" Type="Self.TBLEVENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUSER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLEVENTO">
+              <PropertyRef Name="ID_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SuspiciusDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLEVENTO" EntityType="Self.TBLEVENTO" />
+          <EntitySet Name="TBLUSER" EntityType="Self.TBLUSER" />
+          <AssociationSet Name="FK__TBLEVENTO__ID_us__4E88ABD4" Association="Self.FK__TBLEVENTO__ID_us__4E88ABD4">
+            <End Role="TBLUSER" EntitySet="TBLUSER" />
+            <End Role="TBLEVENTO" EntitySet="TBLEVENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SuspiciusDBModelStoreContainer" CdmEntityContainer="SuspiciusDBEntities">
+          <EntitySetMapping Name="TBLEVENTO">
+            <EntityTypeMapping TypeName="SuspiciusDBModel.TBLEVENTO">
+              <MappingFragment StoreEntitySet="TBLEVENTO">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="nom_evento" ColumnName="nom_evento" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="foto_evento" ColumnName="foto_evento" />
+                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUSER">
+            <EntityTypeMapping TypeName="SuspiciusDBModel.TBLUSER">
+              <MappingFragment StoreEntitySet="TBLUSER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="n_user" ColumnName="n_user" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
